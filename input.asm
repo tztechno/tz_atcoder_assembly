@@ -3,7 +3,34 @@
 #######################################################
 5
 ----------------
+section .data
+    fmt_d db "%d", 10, 0  ; 整数入出力用のフォーマット文字列
 
+section .bss
+    n resd 1              ; 整数を格納する領域
+
+section .text
+    extern printf, scanf
+
+global main
+
+main:
+    push rbp
+    mov rbp, rsp
+
+    ; 整数入力
+    lea rdi, [rel fmt_d]
+    lea rsi, [rel n]
+    call scanf wrt ..plt
+
+    ; 整数出力
+    lea rdi, [rel fmt_d]
+    mov esi, [rel n]
+    call printf wrt ..plt
+
+    pop rbp
+    mov rax, 0
+    ret
 #######################################################
 test
 ----------------
