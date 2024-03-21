@@ -1,6 +1,44 @@
 #######################################################
 #######################################################
 #######################################################
+#######################################################
+2 3 --> 合計を出力
+-----------------
+
+section .data
+  fmt_i db "%d", 0
+  fmt_p db "%d", 0
+  
+section .bss  
+  b resd 3 
+  c resd 3 
+
+section .text
+  extern printf, scanf
+  global main
+
+main:
+  push rbp
+  
+  lea rdi, [rel fmt_i]
+  lea rsi, [rel b]
+  call scanf wrt ..plt
+  
+  lea rdi, [rel fmt_i]
+  lea rsi, [rel c]
+  call scanf wrt ..plt
+
+  mov rax, [rel b]
+  add rax, [rel c]
+  
+  lea rdi, [rel fmt_p]
+  mov rsi, rax
+  call printf wrt ..plt
+  
+  mov rax, 0
+  pop rbp
+  ret
+#######################################################
 5
 ----------------
 section .data
