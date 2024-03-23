@@ -42,7 +42,7 @@ section .text
     global main
 
 section .data
-    msg db "Hello, world!", 10
+    msg db "Hello, world!", 0x0A
 
 main:
     mov  rax, 1
